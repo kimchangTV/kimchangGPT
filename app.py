@@ -1,22 +1,20 @@
 import os
+import sys
 from langchain.llms import OpenAI
 from langchain.chains import LLMChain
 from langchain.prompts import PromptTemplate
-from langchain.document_loaders   
- import   
- TextLoader, PyPDFLoader
+from langchain.document_loaders import TextLoader, PyPDFLoader
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.embeddings import OpenAIEmbeddings
-from langchain.vectorstores import   
- FAISS
+from langchain.vectorstores import FAISS
 
 # Set your OpenAI API key 
 os.environ["OPENAI_API_KEY"] = "your_actual_api_key"
 
 # Load your data
 loaders = [
-    TextLoader("path/to/your/text_file.txt"),
-    PyPDFLoader("path/to/your/pdf_file.pdf")
+    TextLoader("data/text_file.txt"),
+    PyPDFLoader("data/pdf_file.pdf")
 ]
 documents = []
 for loader in loaders:
@@ -27,8 +25,7 @@ text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
 docs = text_splitter.split_documents(documents)   
 
 
-# Create   
- embeddings
+# Create embeddings
 embeddings = OpenAIEmbeddings()
 
 # Store embeddings in a vectorstore
@@ -51,7 +48,7 @@ qa_chain = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=ve
 
 
 # Get user input (if using Streamlit, use st.text_input)
-question = input("Enter your question about Korean cuisine: ")
+question = st.text_input("Enter your question about Korean cuisine: ")
 
 # Run the chain
 result = qa_chain({"query": question})
