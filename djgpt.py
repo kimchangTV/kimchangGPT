@@ -6,8 +6,9 @@ sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 import sqlite3
 
 from langchain_community.document_loaders import DirectoryLoader, TextLoader, PyPDFLoader, CSVLoader
+from langchain_community.vectorstores import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
-from langchain.vectorstores import Chroma
+#from langchain.vectorstores import Chroma
 from langchain.chains import RetrievalQA
 from langchain_openai import ChatOpenAI
 from langchain.prompts.chat import (
