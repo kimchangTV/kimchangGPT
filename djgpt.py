@@ -2,7 +2,7 @@ __import__('pysqlite3')
 import sys
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
-#import sqlite3
+import sqlite3
 
 from langchain_community.document_loaders import DirectoryLoader, TextLoader, PyPDFLoader, CSVLoader
 from langchain_community.vectorstores import Chroma
@@ -37,7 +37,7 @@ for excel_loader in excel_loaders:
     docs.extend(excel_loader.load())
 
 # Create embeddings and vector store
-embeddings = HuggingFaceEmbeddings(model_name="paraphrase-multilingual-MiniLM-L12-v2")  # Updated import
+embeddings = HuggingFaceEmbeddings(model_name="paraphrase-multilingual-MiniLM-L12-v2", clean_up_tokenization_spaces=True)  # Updated import
 db = Chroma.from_documents(docs, embeddings)  # Updated import
 
 
