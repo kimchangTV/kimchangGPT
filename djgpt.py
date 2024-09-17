@@ -1,9 +1,8 @@
 __import__('pysqlite3')
 import sys
-
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
-import sqlite3
+#import sqlite3
 
 from langchain_community.document_loaders import DirectoryLoader, TextLoader, PyPDFLoader, CSVLoader
 from langchain_community.vectorstores import Chroma
