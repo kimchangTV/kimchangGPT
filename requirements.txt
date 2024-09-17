@@ -9,4 +9,3 @@ langchain-huggingface
 langchain-openai
 protobuf~=3.19.0
 pysqlite3-binary
-google-colab

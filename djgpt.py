@@ -1,6 +1,6 @@
-__import__('pysqlite3')
-import sys
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+#__import__('pysqlite3')
+#import sys
+#sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 from langchain_community.document_loaders import DirectoryLoader, TextLoader, PyPDFLoader, CSVLoader
 from langchain_huggingface import HuggingFaceEmbeddings
@@ -15,7 +15,7 @@ from langchain.prompts.chat import (
 import streamlit as st
 import os
 import time
-import sqlite3
+#import sqlite3
 
 # Set your OpenAI API key
 os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"] 
