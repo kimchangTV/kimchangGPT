@@ -7,3 +7,4 @@ openai
 langchain-community
 langchain-huggingface
 langchain-openai
+protobuf~=3.19.0
