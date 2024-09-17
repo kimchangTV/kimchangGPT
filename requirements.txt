@@ -4,3 +4,4 @@ pymupdf
 chromadb
 sentence-transformers
 openai
+langchain-community
