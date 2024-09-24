@@ -36,10 +36,18 @@ excel_loaders = [CSVLoader(f) for f in ["1-2.csv"]]  # Replace with your Excel f
 for excel_loader in excel_loaders:
     docs.extend(excel_loader.load())
 
-# Create embeddings and vector store
-embeddings = HuggingFaceEmbeddings(model_name="paraphrase-multilingual-MiniLM-L12-v2", clean_up_tokenization_spaces=True)  # Updated import
-db = Chroma.from_documents(docs, embeddings)  # Updated import
+# Specify the model name you're using 
+model_name = "jhgan/ko-sroberta-multitask" 
 
+# Load the tokenizer associated with your model
+tokenizer = AutoTokenizer.from_pretrained(model_name) 
+
+# Set the clean_up_tokenization_spaces parameter in the tokenizer
+tokenizer.clean_up_tokenization_spaces = False
+
+# Create embeddings using the tokenizer
+embeddings = HuggingFaceEmbeddings(model_name=model_name, encode_kwargs={"tokenizer": tokenizer}) 
+db = Chroma.from_documents(docs, embeddings)
 
 # Set up LLM (ChatOpenAI) and RetrievalQA chain
 llm = ChatOpenAI(temperature=0.7, model_name="gpt-3.5-turbo")  # or any other suitable chat model
