@@ -54,7 +54,7 @@ for excel_loader in excel_loaders:
 #embeddings = HuggingFaceEmbeddings(model_name=model_name, encode_kwargs={"tokenizer": tokenizer}) 
 #db = Chroma.from_documents(docs, embeddings)
 embeddings = HuggingFaceEmbeddings(model_name="jhgan/ko-sroberta-multitask")  
-db = Chroma.from_documents(docs, embeddings)
+db = Chroma.from_documents(docs, embeddings, collection_name="langchain", persist_directory="./")
 
 # Set up LLM (ChatOpenAI) and RetrievalQA chain
 llm = ChatOpenAI(temperature=0.7, model_name="gpt-3.5-turbo")  # or any other suitable chat model
