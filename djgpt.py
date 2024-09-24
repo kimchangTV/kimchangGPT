@@ -97,7 +97,7 @@ if st.button("생성"):
 
     # If achievement criteria is provided, add it to the query
     if achievement_criteria:
-        query += f"다음 성취 기준과 관련된 활동을 디자인해주세요: '{achievement_criteria}'"
+        query += f"다음 성취 기준과 관련된 활동을 디자인해주고 각 차시의 활동이 이 성취 기준과 어떠한 연관성이 있는지 설명해주세요.: '{achievement_criteria}'"
 
     with st.spinner("답변 생성 중..."):
         result = qa_chain({"question": query})
