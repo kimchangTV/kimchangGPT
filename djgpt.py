@@ -18,6 +18,11 @@ from langchain.prompts.chat import (
 import streamlit as st
 import os
 import time
+import warnings
+
+# Suppress the specific FutureWarning
+warnings.filterwarnings("ignore", message="`clean_up_tokenization_spaces` was not set")
+
 
 # Set your OpenAI API key
 os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"] 
@@ -37,16 +42,18 @@ for excel_loader in excel_loaders:
     docs.extend(excel_loader.load())
 
 # Specify the model name you're using 
-model_name = "jhgan/ko-sroberta-multitask" 
+#model_name = "jhgan/ko-sroberta-multitask" 
 
 # Load the tokenizer associated with your model
-tokenizer = AutoTokenizer.from_pretrained(model_name) 
+#tokenizer = AutoTokenizer.from_pretrained(model_name) 
 
 # Set the clean_up_tokenization_spaces parameter in the tokenizer
-tokenizer.clean_up_tokenization_spaces = False
+#tokenizer.clean_up_tokenization_spaces = False
 
 # Create embeddings using the tokenizer
-embeddings = HuggingFaceEmbeddings(model_name=model_name, encode_kwargs={"tokenizer": tokenizer}) 
+#embeddings = HuggingFaceEmbeddings(model_name=model_name, encode_kwargs={"tokenizer": tokenizer}) 
+#db = Chroma.from_documents(docs, embeddings)
+embeddings = HuggingFaceEmbeddings(model_name="jhgan/ko-sroberta-multitask")  
 db = Chroma.from_documents(docs, embeddings)
 
 # Set up LLM (ChatOpenAI) and RetrievalQA chain
